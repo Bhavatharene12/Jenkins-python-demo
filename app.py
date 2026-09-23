@@ -1,6 +1,6 @@
 def multiply(a, b):
-    # Pass version
-    return a * b
+    # Broken version (returns addition instead of multiplication)
+    return a + b 
 
 def divide(a, b):
     if b == 0:
