@@ -1,16 +1,17 @@
 pipeline {
-    agent { label 'windows' } // Ensures it runs on your Windows agent
+    agent any // Automatically picks your available agent without throwing label errors
 
     stages {
         stage('Checkout') {
             steps {
-                // Pulls code from your repository
+                // Pulls the latest code from your GitHub repository
                 checkout scm
             }
         }
 
         stage('Install Dependencies') {
             steps {
+                // Creates a virtual environment and installs pytest on Windows
                 bat '''
                 python -m venv venv
                 call venv\\Scripts\\activate
@@ -21,6 +22,7 @@ pipeline {
 
         stage('Run Unit Tests') {
             steps {
+                // Runs the pytest suite and generates a results report
                 bat '''
                 call venv\\Scripts\\activate
                 pytest test_app.py --junitxml=results.xml
